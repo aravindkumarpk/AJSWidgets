@@ -7,7 +7,7 @@ var __indexOf = [].indexOf || function(item) {
         return -1;
     };
 
-angular.module('SFSiteVisitApp').directive('fieldsDirective', function () {
+angular.module('AJSWidgets').directive('fieldsDirective', function () {
 
     var getTemplateUrl = function (question) {
          
