@@ -1,15 +1,3 @@
-<!--<div class="input-group input-group-sm" style="width:100%">
-    <span class="input-group-addon" id="sizing-addon1">
-        {{field.question_text}} :
-        <select class="form-control" id="combo-{{field.q_id}}" ng-model="field.given_answer_id" ng-disabled="{{field.readwrite}}">
-            <option ng-repeat="option in field.answerList track by option.answer_id" ng-selected="{{option.answer_id == field.given_answer_id}}" value="{{option.answer_id}}">
-                {{option.answer_text}}
-            </option>
-        </select>
-    </span>
-    
-</div>
-<br>-->
 <div class="form-group">
     <label for="combo-{{field.q_id}}" class="col-sm-2 control-label">
         {{field.question_text}}
