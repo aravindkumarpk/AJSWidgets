@@ -1,8 +1,7 @@
-﻿//angular.module('SFSiteVisitApp').value('app.config', {
-//    baseUrl: 'http://localhost' // Set your base path here
-//});
+﻿angular.module('AJSWidgets').value('app.config', {
+    baseUrl: 'http://localhost' // Set your base path here
+});
 
-//angular.module('SFSiteVisitApp').config(function () {
-//    // routeProvider config, allows minification
-//    baseUrl: 'http://localhost';
-//});
+angular.module('SFSiteVisitApp').config(function () {
+    baseUrl: 'http://localhost';
+});
