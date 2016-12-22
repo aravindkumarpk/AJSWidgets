@@ -3,20 +3,8 @@
     padding: 0px;
     background: #fafafa;  
     overflow-x: hidden;     
-    font-size:13px;
-    /*background:url('../../Content/img/bg.jpg') repeat-x #718693;*/
-    /*background:url('../../Content/img/DoE.jpg');*/
+    font-size:13px;  
    }
-
-
-/* Set padding to keep content from hitting the edges */ 
-/*.body-content {     
-    padding-top: 5px;
-    padding-left: 15px; 
-    padding-right: 15px; 
-    padding-bottom: 15px; 
-}*/ 
- 
 
 .grid-style {
     border: 1px solid rgb(212,212,212);
@@ -43,16 +31,6 @@ td {
 th {
  text-align: center;
 }
- 
-
-/*tr:hover {
-    background-color: #FFCF8B;   
-}*/
-
-/*tr.selectedstyle {
-    background-color: blueviolet;
-    font-weight:bold;
-}*/
 
 .selected {
     background-color:#888888;
