@@ -1,5 +1,5 @@
 ﻿
-angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function ($scope, $rootScope, $timeout, $window, $http, $log, ngFormBuilderService) {
+angular.module('AJSWidgets').controller('ngFormBuilderController', function ($scope, $rootScope, $timeout, $window, $http, $log, ngFormBuilderService) {
 
     $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
@@ -35,36 +35,7 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
             return ((item.form_id === $scope.formID) && (item.section_id === Section_Id)) || (item.q_id <= 0);
         }       
     };
-
-    //ToolTip
-    //var $e,
-    //index,
-    //optionHeight = 20,
-    //isWindows = navigator.platform.toLowerCase().indexOf('win') > -1;
-
-    //$("#selqndet").on('mouseleave', function (e) {
-    //    $('#selqndet').popover('destroy');
-    //});
-
-    //$("#selqndet").on('mousemove', function (e) {
-    //    if (!isWindows) {
-    //        var $e = $(e.target);
-    //    } else {
-    //        var newIndex = Math.floor(e.clientY / optionHeight);
-    //        if (newIndex === index) return;
-    //        index = newIndex;
-    //        $e = $(this).find('option:eq(' + index + ')');
-    //    }
-    //    if ($e.is('option')) {
-    //        $('#selqndet').popover('destroy');
-    //        $("#selqndet").popover({
-    //            trigger: 'manual',
-    //            placement: 'right',
-    //            title: $e.attr("data-title"),
-    //            content: $e.attr("data-content")
-    //        }).popover('show');
-    //    }
-    //});
+    
     $("[data-toggle=tooltip]").tooltip({
         placement: $(this).data("placement") || 'top'
     });
@@ -79,14 +50,7 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
 
         $scope.formErrMsg = null;
         $scope.formsuccMsg = null;
-
-        //$scope.q_id = null;
-        //$scope.calc_typeid = null;
-        //$scope.SectionID = null;
-        //$scope.grplist = {};
-        //$scope.grplist.ACCESS = [];
-        //$scope.CALCADDlist = {};
-        //$scope.CALCADDlist.CALC_ADD = [];
+      
         $scope.dvCALC_ADD = false;
         $scope.dvCALC_CASE = false;
         $scope.dvCALC_SUB = false;
@@ -94,22 +58,10 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
 
         $scope.caq_calcca_item_answer_id = null;
         $scope.caq_calcca_item_q_id = null;
-
-        //$scope.caq_calcif_item.if_qn_id = null;
-        //$scope.caq_calcif_item.answer_id = null;
-        //$scope.questiondetailsCalcCase = null;
-        //$scope.questiondetailsCalcCA = null;
-        //$scope.questiondetails = null;
-
-        //$scope.selFormlistsarr = [];
-        //$scope.selFormfinallists = [];
-
-        //$scope.form.forms.form_lists.splice(0, $scope.form.forms.form_lists.length);
-    };
+   };
 
     $scope.clickLoadFormlist = function () {
         $('#fountainG').show();
-
         $scope.formlistdetails = null;
 
         ngFormBuilderService.GetForms('', '').then(function (result) {
@@ -137,7 +89,6 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
 
     $scope.clickLoadFormSeclist = function (mdlformlistdetails) {
         $('#fountainG').show();
-
         $scope.formID = mdlformlistdetails;
         $scope.forms.form.formsectiondetails = new Array();
         ngFormBuilderService.GetFormSectionDetails(mdlformlistdetails).then(function (result) {
@@ -307,17 +258,12 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
     $scope.forms = {};
     $scope.forms.form = {};
     $scope.forms.form.formsectiondetails = new Array();
-    //var newForm = {
-    //    "form_id": $scope.formID
-    //};
 
     $('.progress-bar-fill').delay(1000).queue(function () {
         $(this).css('width', '100%')
     });
 
     $scope.forms.form.formsectiondetails.Questions = {};
-    //$scope.form.push(newForm);
-   
     $scope.formList = [];
 
     $scope.QuestionList = {};
@@ -351,45 +297,16 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
             $timeout(function () {
                 if (result.data.length > 0) {
                     $scope.previewMode = false;
-                    $scope.forms = jQuery.parseJSON(result.data);
-                    //angular.forEach(result.data, function (item) {                                                 
-                    //        var newQList = {
-                    //            "dtl_id": String(item.dtl_id),
-                    //            "q_id": String(item.q_id),
-                    //            "question_text": String(item.question_text),
-                    //            "type_id": String(item.type_id),
-                    //            //"link_q_id": String(item.link_q_id),
-                    //            //"ca_answer_id": String(item.ca_answer_id),
-                    //            "sequence": String(item.sequence),
-                    //            "obj_id": String(item.obj_id)
-                    //            //"section_id": String(item.section_id)
-                    //            //"CA_Answers": {}
-                    //        };                  
-                    //});
+                    $scope.forms = jQuery.parseJSON(result.data);              
                     
-                    $scope.forms.form.formsectiondetails.push($scope.forms.form.formsectiondetails);
-
-                    //$scope.form.Questions.Question_List = $scope.formsOp.form.Questions.list;
-                     
-                    //$scope.form.Questions.Question_List.push($scope.formsOp.Forms.form.list);
+                    $scope.forms.form.formsectiondetails.push($scope.forms.form.formsectiondetails);                  
 
                     if (!$scope.$$phase) {
                         $scope.$apply();
-                    };
-
-                    //$scope.showJson = true;
-
-                    //alert(angular.toJson($scope.form.Questions));
-                    //for (var i = 0; i < $scope.form.Questions.Question_List.length; i++) {
-                    //    if ($scope.form.Questions.Question_List[i].dtl_id == $scope.question.dtl_id) {
-                    //        $scope.question.q_id = $scope.form.Questions.Question_List[i].q_id;
-                    //        break;
-                    //    }
-                    //}
+                    };              
 
                 }
-                else {
-                    //$scope.previewMode = true;
+                else {                   
                     $scope.outputdata = "No Questions available for the selected section. Please add!";
                     $('#myModalfrmbldr').modal('show');
                 }
@@ -403,7 +320,6 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
     }
       );
 
-
         $('#fountainG').hide();
     }
 
@@ -412,19 +328,9 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
         $scope.SectionID = section_id;
     }
 
-
-     
+    
     // create New Question 
-    $scope.addquestions = function (index) {
-
-        //if ($scope.form.Question_List.length === 0)
-        //{
-        //    $scope.QuestionList.lastAdedID = 0;
-        //    $scope.QuestionList.lastAdedID++;
-        //}
-        //else
-        
-        //$('#prog-bar').show();
+    $scope.addquestions = function (index) {    
 
         $scope.QuestionList.lastAdedID++;
 
@@ -432,13 +338,9 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
             "dtl_id": "000"+ String($scope.QuestionList.lastAdedID),
             "q_id": "000" + String($scope.QuestionList.lastAdedID),
             "question_text": null,
-            "type_id": "-1",
-            //"link_q_id": "0",
-            //"ca_answer_id": "0",
+            "type_id": "-1",          
             "sequence": null,
-            "obj_id": null
-            //"section_id": "0"
-            //"CA_Answers": []
+            "obj_id": null           
         };
 
         // put newField into fields array
@@ -447,8 +349,7 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
         if (!$scope.$$phase) {
             $scope.$apply();
         };
-        //$('#prog-bar').hide();
-        //alert(angular.toJson($scope.form.Questions.Question_List));
+     
     }
 
     // deletes particular Question on button click
@@ -490,24 +391,10 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
         //Default CALC_HEADER for Dynamic SQL if Question ID is negative value
         if (question.q_id < 0)
         {            
-            $('selcalctype').readonly = true;
-            //$('[name=calctypeOptions]')($(this)).val(6);
-            //$scope.SelectedCalcType = [{ "type_id": 0, "calc_type": "DEFAULT" }, { "type_id": 1, "calc_type": "CALC_ADD" }, { "type_id": 2, "calc_type": "CALC_CASE" }, { "type_id": 3, "calc_type": "CALC_SUB" }, { "type_id": 5, "calc_type": "CALC_IF" }, { "type_id": 6, "calc_type": "CALC_HEADER" }];
-            //alert($scope.SelectedCalcType[6]);
-            //alert($scope.SelectedCalcType[5].type_id);
-            //question.type_id = $scope.SelectedCalcType[5].type_id;
-            //alert(question.type_id);
-            question.type_id = 6;
-            //if (!$scope.$$phase) {
-
-              //  $scope.$apply();
-            //};
-            //$scope.$apply(function () {
-            //    $scope.question.type_id = 6;
-            //});            
+            $('selcalctype').readonly = true;           
+            question.type_id = 6;                     
         }              
-            
-    
+                
        // alert(angular.toJson($scope.form.Question_List));
     }
 
@@ -535,60 +422,38 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
         $scope.calc_typeid = parseInt($scope.forms.form.formsectiondetails[par_index].Questions.Question_List[index].type_id);
         $scope.question_text = $scope.forms.form.formsectiondetails[par_index].Questions.Question_List[index].question_text;
 
-        //alert($scope.dtl_id);
-        //alert($scope.q_id);
-        //alert($scope.calc_typeid);
-        //alert($scope.SectionID);
-        //if ($scope.calc_typeid === 1) {
-        //    $scope.loadCALCADDlist(frmsec_item);
-        //}
-        //else if ($scope.calc_typeid === 2) {
-        //    $scope.loadCALCCASElist(frmsec_item);
-        //}
-        //else if ($scope.calc_typeid === 3) {
-        //    $scope.loadCALCADDlist(frmsec_item);
-        //}
-        //else if ($scope.calc_typeid === 4) {
-        //    $scope.loadCALCCAlist(frmsec_item);
-        //}
-        //else if ($scope.calc_typeid === 5) {
-        //    $scope.loadCALCIFlist(frmsec_item);
-        //}
-
+    
         switch ($scope.calc_typeid) {
             case 1: {
-                //alert('dvCALC_ADD : ' + $scope.calc_typeid);
+              
                 $scope.selection = "dvCALC_ADD";
                 $scope.loadCALCADDlist();
                 break;
             }
             case 2: {
-                //alert('dvCALC_CASE : ' + $scope.calc_typeid);
+              
                 $scope.selection = "dvCALC_CASE";
                 $scope.loadCALCCASElist();
                 break;
             }
             case 3: {
-               // alert('dvCALC_ADD : ' + $scope.calc_typeid);
+             
                 $scope.selection = "dvCALC_ADD";
                 $scope.loadCALCADDlist();
                 break;
             }
-            case 4: {
-                //alert('dvCALC_CA : ' + $scope.calc_typeid);
-                //$scope.selection = "dvCALC_CA";
-                //$scope.loadCALCCAlist();
+            case 4: {              
                 /*Logic has been changed to display CA as link to Edit the Statement and add multiple Policy to one question*/
                 break;
             }
             case 5: {
-               // alert('dvCALC_IF : ' + $scope.calc_typeid);
+              
                 $scope.selection = "dvCALC_IF";
                 $scope.loadCALCIFlist();
                 break;
             }
             default: {
-                //alert('default');
+               
                 $scope.outputdata = "Rules cannot be applied for Default / Header type questions!";
                 $('#myModalfrmbldr').modal('show');
             }
@@ -912,35 +777,10 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
 
     };
 
-    $scope.clickSaveCADetails = function () {
-        //for (var i = 0; i <  $scope.forms.form.Questions.Question_List.length; i++) {
-        //    if ( $scope.forms.form.Questions.Question_List[i].dtl_id == $scope.dtl_id) {
-        //        //var recentdtlID =  $scope.forms.form.Questions.Question_List[i].dtl_id;
-        //        //findAndReplace( $scope.forms.form.Question_List, question.dtl_id, mdlcalctypdetails[index]);
-        //        // $scope.forms.form.Questions.Question_List[i] = {};
-
-        //        //if (! $scope.forms.form.Questions.Question_List[i].CA_Answers)
-        //             $scope.forms.form.Questions.Question_List[i].CA_Answers = [];// new Array();
-
-        //         $scope.forms.form.Questions.Question_List[i].CA_Answers =  $scope.forms.form.CA_Answers;
-
-        //        for (var j = 0; j <  $scope.forms.form.Questions.Question_List[i].CA_Answers.length; j++) {
-        //             $scope.forms.form.Questions.Question_List[i].CA_Answers[j].ca_statement_text =  $scope.forms.form.CA_Answers[0].ca_statement_text;
-        //        }                
-        //        // $scope.forms.form.Questions.Question_List[i].push($scope.selcalc_calists);              
-        //        break;
-        //    }
-        //}
-
-
+    $scope.clickSaveCADetails = function () {   
         var ca_statement_text =  $scope.forms.form.CA_Answers[0].ca_statement_text;
-        
-
         for (var j = 0; j <  $scope.forms.form.CA_Answers.length; j++) {
              $scope.forms.form.CA_Answers[j].ca_statement_text = ca_statement_text;
-
-            //if ( $scope.forms.form.CA_Answers[j].ca_policy_text === '')
-            //    delete $scope.form.CA_Answers[j];
         }
 
         $scope.selcalc_calists = angular.toJson( $scope.forms.form.CA_Answers);
@@ -1077,57 +917,10 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
         }
         else if ($scope.calc_typeid === 4) {
 
-            //var newformlist = {
-            //    "link_q_id": String(item.link_q_id),
-            //    "ca_answer_id": String(item.ca_answer_id)
-            //};
-
-            //$scope.Question_List.CALC_CA.push(newformlist);
-
-         
-            //alert($scope.selcalc_calists);
-            //$scope.link_q_id = (typeof $scope.caq_calcca_item !== "undefined" && !!$scope.caq_calcca_item) ? $scope.caq_calcca_item : "";
-            //$scope.ca_answer_id = (typeof $scope.caq_calcca_item !== "undefined" && !!$scope.caq_calcca_item) ? $scope.caq_calcca_item : "";
-
-            //var newformlist = {
-            //    "q_id": String($scope.caq_calcif_item.q_id),
-            //    "op_id": String($scope.caq_calcif_item.op_id),
-            //    "answer_id": String($scope.caq_calcif_item.answer_id),
-            //    "result": String($scope.caq_calcif_item.result),
-            //    "Default": String($scope.caq_calcif_item.Default)
-            //};
-            //$scope.CALCIFlist.CALC_IF.push(newformlist);
-            
-            /*
-            $scope.selcalc_calists = angular.toJson($scope.form.CALCCAlist);
-            ngFormBuilderService.AddFormDetailCA($scope.SectionID, $scope.q_id, $scope.selcalc_calists, 'SFAPPQC').then(function (result) {
-                $timeout(function () {
-                    $scope.secsuccMsg = "Data has been updated successfully!";
-                    $scope.succMessage = true;
-                    $scope.errMessage = false;
-
-                    $scope.clickCALCIFlist();
-                }, 0);
-            },
-                                 function () {
-                                     $log.error('Error');
-                                     $scope.secErrMsg = "Error Occured! - Saving Group access Details. Please contact Admin!";
-                                     $scope.errMessage = true;
-                                     $scope.succMessage = false;
-                                 }
-                                 );*/
 
         }
         else if ($scope.calc_typeid === 5) {
-            //alert(  "q_id"+  "op_id" + String($scope.caq_calcif_item.op_id)+"answer_id" + String($scope.caq_calcif_item.answer_id)+"result"+String($scope.caq_calcif_item.result)+"Default"+String($scope.caq_calcif_item.Default));
-            //var newformlist = {
-            //    "q_id": String($scope.caq_calcif_item.q_id),
-            //    "op_id": String($scope.caq_calcif_item.op_id),
-            //    "answer_id": String($scope.caq_calcif_item.answer_id),
-            //    "result": String($scope.caq_calcif_item.result),
-            //    "Default": String($scope.caq_calcif_item.Default)
-            //};
-            //$scope.CALCIFlist.CALC_IF.push(newformlist);
+           
             $scope.selcalc_iflists = angular.toJson( $scope.forms.form.CALCIFlist);
             
             ngFormBuilderService.UpdateFormDetailIf($scope.SectionID, $scope.q_id, $scope.selcalc_iflists, 'SFAPPQC').then(function (result) {
@@ -1263,75 +1056,12 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
                            $scope.succMessage = false;
                        }
                        );
-
-
-
-
     };
 
-    //$scope.selACCESSValue = function ($event, grp_item, roleid) {
-        
-    //    alert(grp_item.group_id + ' ' + roleid);
-    //    if (!$scope.grplist.ACCESS)
-    //        $scope.grplist.ACCESS = new Array();
-
-    //    var Chkbox = $event.target;
-
-    //    if (Chkbox.checked) {
-    //        var newformlist = {
-    //            "group_id": grp_item.group_id,
-    //            "role_id": roleid,
-    //        };
-    //        $scope.grplist.ACCESS.push(newformlist);
-    //    }
-    //    else {
-    //        for (var i = 0; i < $scope.grplist.ACCESS.length; i++) {
-    //            if ($scope.grplist.ACCESS[i].group_id == grp_item.group_id) {
-    //                $scope.grplist.ACCESS.splice(i, 1);
-    //                break;
-    //            }
-    //        }
-    //    }
-
-    //    $scope.selaccesslists = angular.toJson($scope.grplist);
-    //    alert($scope.selaccesslists);
-
-    //};
 
     // add new option to the field
     $scope.clickSaveSectDetails = function (forms) {
-        $('#fountainG').show();
-        //if (! $scope.forms.form.Question_List)
-        //     $scope.forms.form.Question_List = new Array();
-
-        //alert( $scope.forms.form.Question_List.length);
-
-        //alert(question.q_id);
-        //for (var i = 0; i <  $scope.forms.form.Question_List.length; i++) {
-        //    //alert( $scope.forms.formList.length);
-        //    if ( $scope.forms.form.Question_List[i].q_id == question.q_id) {
-        //         $scope.forms.form.Question_List.splice(i, 1);
-        //        break;
-        //    }
-        //}
-
-        //for (var i = 0; i <  $scope.forms.form.Question_List.length; i++) {
-            
-        //     $scope.forms.form.Question_List.splice(i, 1);
-
-        //    var newformlist = {
-        //        "q_id": String($scope.q_id),
-        //        "type_id": String($scope.calc_typeid),
-        //        "link_q_id": String($scope.link_q_id),
-        //        "ca_answer_id": String($scope.ca_answer_id)
-        //    };
-
-        //   break;
-        //}
-
-        // $scope.forms.form.Question_List.push(newformlist);
-        
-        //delete $scope.sel_formquestionlists.question_text;
+        $('#fountainG').show();       
       
         for (var i = 0; i < forms.form.formsectiondetails.Questions.Question_List.length; i++) {
             delete forms.form.formsectiondetails.Questions.Question_List[i].question_text;
@@ -1358,9 +1088,7 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
             $timeout(function () {
                 $scope.outputdata = result.data[0].OutputData;
                 $('#myModalfrmbldr').modal('show');
-                //$scope.clickSection(GetParamsFormDetail.sectionID);
-                //$scope.RefreshSectionlist();
-                //$scope.previewMode = true;
+              
             }, 250);
         },
                      function (result) {
@@ -1407,15 +1135,13 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
 
         ngFormBuilderService.GetDocLayout($scope.formID, 0, 0, 0, 0).then(function (result) {
             $timeout(function () {
-                //$scope.form.formdetails.push(angular.toJson(result.data));
+                
                  $scope.forms.form = result.data;
                 $scope.previewMode = !$scope.previewMode;                
                  $scope.forms.form.submitted = false;
-               // alert(angular.toJson($scope.previewForm));
+   
                 angular.copy( $scope.forms.form, $scope.previewForm);
-                //angular.copy($scope.forms.questions, $scope.previewQuestions.question)
-                //angular.copy($scope.forms.questions, $scope.previewQuestions.question)
-                //alert(angular.toJson($scope.previewForm));
+               
                 }, 0);
             },
         function () {
@@ -1464,27 +1190,5 @@ angular.module('SFSiteVisitApp').controller('ngFormBuilderController', function 
             $scope.dvGroupAddEdit = true;
         } 
     });
-
-    // add the animation to the modal
-    //$(".modal").each(function (index) {
-    //    $(this).on('show.bs.modal', function (e) {
-    //        var open = $(this).attr('data-easein');
-    //        if (open == 'shake') {
-    //            $('.modal-dialog').velocity('callout.' + open);
-    //        } else if (open == 'pulse') {
-    //            $('.modal-dialog').velocity('callout.' + open);
-    //        } else if (open == 'tada') {
-    //            $('.modal-dialog').velocity('callout.' + open);
-    //        } else if (open == 'flash') {
-    //            $('.modal-dialog').velocity('callout.' + open);
-    //        } else if (open == 'bounce') {
-    //            $('.modal-dialog').velocity('callout.' + open);
-    //        } else if (open == 'swing') {
-    //            $('.modal-dialog').velocity('callout.' + open);
-    //        } else {
-    //            $('.modal-dialog').velocity('transition.' + open);
-    //        }
-
-    //    });
-    //});     
+    
 });
