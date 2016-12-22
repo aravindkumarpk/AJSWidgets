@@ -1,13 +1,7 @@
 
 <div class="well" ng-show="!forms.submitted">
-    <!--<div>
-        <h4>Form object content:</h4>
-        <pre>{{ previewForm | json }}</pre>
-    </div>-->
     <div class="field row">
-        <!--<div class="span2">Form Name: {{ forms.form.form_name }}</div>-->
-        <h2>Form Name: {{ forms.form.form_name }}</h2>
-        <!--<div class="span2" style="text-align:right;">Form Status: {{ forms.form.form_name }}</div>-->
+        <h2>Form Name: {{ forms.form.form_name }}</h2>       
     </div>
     <!--<form name="myForm" id="myForm">-->
     <div ng-repeat="frmsec_item  in forms.form.formsectiondetails | unique:'section_id'">
@@ -33,12 +27,10 @@
                                 <div class="row">
                                     <form class="form-horizontal">
                                         <div class="well_bs_css" ng-repeat="question in frmsec_item.questions | unique:'q_id'" ng-if="question.qn_section_id == frmsec_item.section_id">
-                                            <!--<div class="well_bs_css" ng-if="question.qn_section_id == frmsec_item.section_id">-->
-                                            <!--<div class="form-group form-group-sm">-->
+                                   
                                             <fields-directive field="question" ca-scope ="question.calccAlist">
                                             </fields-directive>
-                                            <!--</div>
-                                            </div>-->
+                                          
                                         </div>
                                     </form>
                                 </div>
@@ -120,10 +112,3 @@
         </p>
     </div>
 </div>
-<!--<div ng-show="form.submitted">
-    <h3>Submitted Data</h3>
-    <div ng-repeat="field in forms.formdetails.formsectiondetails">
-        Field Title: {{ field.form_id }} <br>
-        Field Value: {{ field.section_name }} <br><br>
-    </div>
-</div>-->
