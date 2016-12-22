@@ -4,7 +4,7 @@
     this.GetForms = function (searchCol, searchVal) {
         var response = $http({
             method: "GET",
-            url: baseUrl + "/SFSiteVisitsAPI/api/formbuild/GetForms",
+            url: baseUrl + "/API/api/formbuild/GetForms",
             params: {
                 searchCol: searchCol,
                 searchVal: searchVal,
