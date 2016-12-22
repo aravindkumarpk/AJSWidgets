@@ -4,18 +4,9 @@
 }
 
 <div class="row tile_count" ng-controller="ngFormBuilderController" ng-init="clickLoadFormlist()">
-    @*<div class="container-fluid" style="padding:10px 10px 10px 10px">*@
-
-    @*<div class="progress-bar" id="prog-bar" style="display: none">
-            <span class="progress-bar-fill" style="width: 70%"></span>
-        </div>*@
-
     <!-- Page Heading -->
     <div class="row">
-        <div class="col-sm-12 col-md-12">
-            @*<h1 class="page-header">
-                    Manage Forms Builder
-                </h1>*@
+        <div class="col-sm-12 col-md-12">    
             <ol class="breadcrumb">
                 <li>
                     <i class="fa fa-dashboard"></i>  <a href="@Url.Action("Dashboard", "Home")">Dashboard</a>
@@ -36,59 +27,35 @@
                 <form class="form-inline" id="searchForm" method="post">
                     <div class="form-group">
                         <div id="searchInContainer">
-                            @*<input type="radio" name="check" value="ID" id="searchFormID" checked ng-model="mdlsearchFormID" ng-change="radioChanged(mdlsearchFormID)" />
-                                <label for="searchSite" id="siteNameLabel">Search the Form ID</label>
-                                <input type="radio" name="check" value="NAME" id="searchFormName" ng-model="mdlsearchFormName" ng-change="radioChanged(mdlsearchFormName)" />*@
                             <label for="searchWeb">Select The Form Name</label>
-
                         </div>
                     </div>
-                    <div class="form-group">
-                        @*<input id="s" type="text" ng-model="mdlInputtext" />*@
+                    <div class="form-group">                        
                         <select id="s" class="form-control placeholder-color" ng-options="item.form_id as item.form_name for item in formlistdetails"
                                 ng-model="mdlformlistdetails" ng-focus="errorMessage=''">
                             <option value="-1" class="placeholder-color">Please select...</option>
                         </select>
                     </div>
-                    <input type="submit" value="Submit" id="submitButton" ng-click="clickFormDetails(mdlformlistdetails)" /> @*ng-click="clickLoadFormSeclist(mdlformlistdetails)" />*@
-
-
+                    <input type="submit" value="Submit" id="submitButton" ng-click="clickFormDetails(mdlformlistdetails)" />
                 </form>
             </fieldset>
         </div>
     </div>
-
-    <div class="row" id="fountainG" style="display: none">
-        <div id="fountainG_1" class="fountainG"></div>
-        <div id="fountainG_2" class="fountainG"></div>
-        <div id="fountainG_3" class="fountainG"></div>
-        <div id="fountainG_4" class="fountainG"></div>
-        <div id="fountainG_5" class="fountainG"></div>
-        <div id="fountainG_6" class="fountainG"></div>
-        <div id="fountainG_7" class="fountainG"></div>
-        <div id="fountainG_8" class="fountainG"></div>
-    </div>
-
+    
     <div class="well" ng-hide="previewMode">
-
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
-            @*<accordion class="accordion" close-others="oneAtATime" id="monogram-acc">
-                <accordion-group ng-repeat="frmsec_item  in formsectiondetails">
-                        <accordion-heading> class="accordion-group"
-            *@
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">            
             <p ng-show="frmsec_item.length == 0">No Sections added yet.</p>
-            <div class="panel panel-primary" ng-repeat="frmsec_item  in forms.form.formsectiondetails">
-                @*track by frmsec_item.section_id">*@
+            <div class="panel panel-primary" ng-repeat="frmsec_item  in forms.form.formsectiondetails">                
                 <div class="panel-heading" role="tab" id="heading-{{$index}}">
                     <h6 class="panel-title">
-                        <a href="" role="button" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-target="#{{frmsec_item.section_id}}-{{$index}}" style="text-decoration:none"
+                        <a href="" role="button" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" 
+                            data-target="#{{frmsec_item.section_id}}-{{$index}}" style="text-decoration:none"
                            ng-click="clickSection(frmsec_item.section_id)">
                             Section : {{frmsec_item.section_name}}
                         </a>
                     </h6>
                 </div>
-                <div id="{{frmsec_item.section_id}}-{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{$index}}">
-                    @*** Section Level details for each Question*@
+                <div id="{{frmsec_item.section_id}}-{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{$index}}">                    
                     <div class="panel-body">
                         <div id="searchForm">
                             <div class="container-fluid">
@@ -102,11 +69,9 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    @*<div class="form-group">*@
+                                <div class="row">                                 
                                     <div class="well_bs_css" ng-repeat="question in frmsec_item.Questions.Question_List">
-                                        <form class="form-inline" role="form">
-                                            @*<div class="form-group-frmbld">*@
+                                        <form class="form-inline" role="form">                                 
                                             <div class="form-group form-group-sm">
                                                 <label for="selqndet" class="col-sm-2 control-label">Select The Question</label>
                                                 <div class="col-sm-10">
@@ -122,8 +87,7 @@
                                                 <label for="selcalctype" class="col-sm-2 control-label">Calculated Type</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-control" id="selcalctype" name="calctypeOptions" ng-model="question.type_id" ng-focus="errorMessage=''" ng-disabled="(question.q_id<0)">
-                                                        @*ng-options="item.type_id as item.calc_type for item in calctypdetails">*@
-                                                        <option ng-repeat="item in calctypdetails" ng-selected="{{item.type_id == question.type_id}}" value="{{item.type_id}}">
+                                                       <option ng-repeat="item in calctypdetails" ng-selected="{{item.type_id == question.type_id}}" value="{{item.type_id}}">
                                                             {{item.calc_type}}
                                                         </option>
                                                     </select>
@@ -150,8 +114,7 @@
                                                 <div class="col-sm-10">
                                                     <a role="button" href="" id="grpaccess" class="btn btn-group-sm btn-primary" ng-disabled="(!question.q_id)||(question.q_id<0)"
                                                        ng-click="loadGrouplist($parent.$index, $index)" data-toggle="tooltip" data-placement="top" title="Access!">
-                                                        <i class="fa fa-users" style="color: white;"> </i>
-                                                        @*<span class="glyphicon glyphicon-lock" style="color:red;"></span> Access*@
+                                                        <i class="fa fa-users" style="color: white;"> </i>                                                       
                                                     </a>
                                                 </div>
                                             </div>
@@ -173,14 +136,9 @@
                                                         @*<span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete*@
                                                     </a>
                                                 </div>
-                                            </div>
-                                            @*</div>
-                                                </div>*@
-
+                                            </div>                                           
                                         </form>
-
-                                    </div>
-                                    @*</div>*@
+                                    </div>                           
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-12 col-xs-12">
@@ -198,30 +156,6 @@
                 </div>
             </div>
         </div>
-
-        @* <hr>
-            </accordion-heading> </accordion-group>
-                </accordion>*@
-
-
-        @* <p class="text-center">
-                        <button class="btn btn-primary right" type="button" ng-click="previewOn()"><i class="icon-eye-open icon-white"></i> Preview Form</button>
-                        <button class="btn btn-danger right" type="button" ng-click="reset()"><i class="icon-refresh icon-white"></i> Reset</button>
-                    </p>
-                   <br>
-            <hr>
-                    <div class="text-center">
-                        <a class="btn btn-small btn-primary" ng-show="!showJson" ng-click="showJson = true">Show form json object</a>
-                        <a class="btn btn-small btn-inverse" ng-show="showJson" ng-click="showJson = false">Hide form json object</a><br><br>
-                    </div>*@
-
-        <div ng-show="showJson">
-            <h4>Form object content:</h4>
-            <pre>{{ form | json }}</pre>
-            @*<pre>{{ sel_formquestionlists | json }}</pre>*@
-        </div>
-
-
     </div>
 
     <div id="myModalCalcFields" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="width:100%">
@@ -557,14 +491,12 @@
                         <div class="form-group form-group-sm">
                             <div ng-show="dvGrpAccessDetails" style="padding: .35em .625em .75em; height: 100%; width: 100%; " class="table-responsive">
                                 <label for="selfrmlist" class="col-sm-2 control-label fa-2x">Select The Groups and Roles</label>
-
                                 <table ng-table="tblGrpAccessDetails" id="tblGrpAccessDetailsList" class="table table-bordered table-condensed">
                                     <thead>
                                         <tr>
                                             <th style="text-align:center;display:none;">Group ID</th>
                                             <th>Group Name</th>
-                                            <th>Access Level</th>
-                                            @*<th>Select</th>*@
+                                            <th>Access Level</th>                                          
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -579,10 +511,7 @@
                                                         {{item.role_desc}}
                                                     </option>
                                                 </select>
-                                            </td>
-                                            @*<td style="text-align:center">
-                                                    <input type="checkbox" ng-model="grp_item.roll_id" ng-checked="{{grp_item.role_id}}" ng-click="selACCESSValue($event, grp_item,mdlgrprolelistdetails)" />
-                                                </td>*@
+                                            </td>                                       
                                         </tr>
                                     </tbody>
                                     <tfoot>
@@ -618,14 +547,6 @@
         </div>
     </div>
 
-
-    @*<div class="form-fields-preview" ng-show="previewMode">
-            <forms-directive form="previewForm"></forms-directive>
-
-            <p class="text-center">
-                <button class="btn btn-primary btn-large right" type="button" ng-click="previewOff()"><i class="icon-arrow-left icon-white"></i> Back to Create Mode</button>
-            </p>
-        </div>*@
 </div>
 
 @section scripts{
