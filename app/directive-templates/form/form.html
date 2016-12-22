@@ -1,0 +1,129 @@
+
+<div class="well" ng-show="!forms.submitted">
+    <!--<div>
+        <h4>Form object content:</h4>
+        <pre>{{ previewForm | json }}</pre>
+    </div>-->
+    <div class="field row">
+        <!--<div class="span2">Form Name: {{ forms.form.form_name }}</div>-->
+        <h2>Form Name: {{ forms.form.form_name }}</h2>
+        <!--<div class="span2" style="text-align:right;">Form Status: {{ forms.form.form_name }}</div>-->
+    </div>
+    <!--<form name="myForm" id="myForm">-->
+    <div ng-repeat="frmsec_item  in forms.form.formsectiondetails | unique:'section_id'">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+            <p ng-show="frmsec_item.length == 0">No Sections added yet.</p>
+            <div class="panel panel-primary">
+                <div class="panel-heading" role="tab" id="heading-{{$index + 1}}">
+                    <h6 class="panel-title">
+                        <a href="" role="button" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" data-target="#{{frmsec_item.section_id}}-{{$index}}" style="text-decoration:none;">
+                            <span class="pull-left;" style="text-decoration:none; text-align:center">
+                                Section : {{frmsec_item.section_name}}
+                            </span>
+                            <span class="pull-right" style="text-decoration:none; text-align:center">
+                                Status : {{frmsec_item.section_status}}
+                            </span>
+                        </a>
+                    </h6>
+                </div>
+                <div id="{{frmsec_item.section_id}}-{{$index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{$index}}">
+                    <div class="panel-body">
+                        <div id="searchForm">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <form class="form-horizontal">
+                                        <div class="well_bs_css" ng-repeat="question in frmsec_item.questions | unique:'q_id'" ng-if="question.qn_section_id == frmsec_item.section_id">
+                                            <!--<div class="well_bs_css" ng-if="question.qn_section_id == frmsec_item.section_id">-->
+                                            <!--<div class="form-group form-group-sm">-->
+                                            <fields-directive field="question" ca-scope ="question.calccAlist">
+                                            </fields-directive>
+                                            <!--</div>
+                                            </div>-->
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="row">
+                                    <div class="well_bs_css">
+                                        <table ng-table="tblCALC_CAetails" id="tblSFFormDetailsList" class="table table-bordered table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <th>Question / Statement</th>
+                                                    <th>Regulations / OSF Policies</th>
+                                                    <th>Observer's Comments</th>
+                                                    <th>Action Taken</th>
+                                                    <th>Violation Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="CALCCA_item in frmsec_item.questions">
+                                                <tr ng-repeat="calccAlist_item in CALCCA_item.calccAlist | unique:'ca_link_q_id'" ng-if="(calccAlist_item.ca_section_id === frmsec_item.section_id) && (calccAlist_item.ca_link_q_id != 0)">
+                                                    <td style="text-align:center;">
+                                                        <textarea style="width:100%; height:100%" type="text" readonly="readonly" ng-model="calccAlist_item.ca_statement_text" value="{{calccAlist_item.ca_statement_text}}"></textarea>
+                                                    </td>
+                                                    <td style="text-align:center;">
+                                                        <textarea style="width:100%; height:100%" type="text" readonly="readonly" ng-show="editingData[calccAlist_item.ca_id]" 
+                                                                  ng-model="calccAlist_item.ca_policy_text" value="{{calccAlist_item.ca_policy_text}}"></textarea>
+                                                    </td>
+                                                    <td style="text-align:center;">
+                                                        <textarea style="width:100%; height:100%" type="text" ng-model="calccAlist_item.ca_comment" value="{{calccAlist_item.ca_comment}}"></textarea>
+                                                    </td>
+                                                    <td style="text-align:center;">
+                                                        <textarea style="width:100%; height:100%" type="text" ng-model="calccAlist_item.ca_action" value="{{calccAlist_item.ca_action}}"></textarea>
+                                                    </td>
+                                                    <td style="text-align:left;">
+                                                        <label class="radio-inline">
+                                                            <input type="radio" value="{{calccAlist_item.ca_status}}" ng-model="calccAlist_item.ca_status" />
+                                                            &nbsp;<span>Open (DSF) </span>
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" value="{{calccAlist_item.ca_status}}" ng-model="calccAlist_item.ca_status" />
+                                                            &nbsp;<span>Open (OSF) </span>
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" value="{{calccAlist_item.ca_status}}" ng-model="calccAlist_item.ca_status" />
+                                                            &nbsp;<span>Resolved (DSF) </span>
+                                                        </label>
+                                                        <label class="radio-inline">
+                                                            <input type="radio" value="{{calccAlist_item.ca_status}}" ng-model="calccAlist_item.ca_status" />
+                                                            &nbsp;<span>Resolved (OSF) </span>
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-xs-12">
+                                        <div class="form-group" style="float:right">
+                                            <a href="" role="button" class="btn btn-group-sm btn-primary pull-right" ng-disabled="(frmsec_item.questions.length==0)" ng-click="clickSaveDocDetails(form, frmsec_item)">
+                                                <i class="fa fa-save fa-lg i-title"> Save </i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--</form>-->
+
+    <div class="form-actions">
+        <p class="text-center">
+            <button class="btn btn-success right" type="button" ng-disabled="!myForm.$valid" ng-click="submit()"><i class="icon-edit icon-white"></i> Submit Form</button>
+            <button class="btn btn-danger right" type="button" ng-click="cancel()"><i class="icon-remove icon-white"></i> Cancel</button>
+        </p>
+    </div>
+</div>
+<!--<div ng-show="form.submitted">
+    <h3>Submitted Data</h3>
+    <div ng-repeat="field in forms.formdetails.formsectiondetails">
+        Field Title: {{ field.form_id }} <br>
+        Field Value: {{ field.section_name }} <br><br>
+    </div>
+</div>-->
